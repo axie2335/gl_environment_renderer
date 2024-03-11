@@ -56,7 +56,8 @@ public:
     }
 
     vec3 unit_vector() {
-        return *this / this->length();
+        double length = this->length();
+        return vec3(v[0] / length, v[1] / length, v[2] / length);
     }
 
 private:

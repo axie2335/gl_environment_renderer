@@ -1,18 +1,14 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
-#include <vector>
-#include "vec3.h"
-#include "camera.h"
-#include "edge.h"
+#include "world.h"
 
 class simulation {
 public:
-    simulation(camera) : camera(camera), vertices(), edges() {};
+    simulation() : sim_world() {};
+    void run();
 private:
-    camera camera;
-    std::vector<vec3> vertices;
-    std::vector<edge> edges;
+    world sim_world;
 };
 
 #endif
