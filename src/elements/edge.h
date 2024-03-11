@@ -3,18 +3,13 @@
 
 #include "vec3.h"
 
-class edge {
+class Edge {
 public:
-    edge(vec3 &v1, vec3 &v2) : v1(v1), v2(v2) {};
+    Edge(Vec3 &v1, Vec3 &v2) : v1(v1), v2(v2) {};
 private:
-    vec3 &v1;
-    vec3 &v2;
+    Vec3 &v1;
+    Vec3 &v2;
 };
-
-
-
-
-
 
 
 #endif

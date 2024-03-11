@@ -2,13 +2,16 @@
 #define SIMULATION_H
 
 #include "world.h"
+#include "simulationrender.h"
 
-class simulation {
+class Simulation {
 public:
-    simulation() : sim_world() {};
+    Simulation() : sim_world(), world_render(sim_world) {};
+    void initialize();
     void run();
 private:
-    world sim_world;
+    World sim_world;
+    SimulationRender world_render;
 };
 
 #endif

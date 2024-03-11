@@ -1,7 +1,8 @@
 #include <iostream>
-#include "elements/simulation.h"
+#include "simulation.h"
 
 int main() {
-    simulation sim;
+    Simulation sim;
+    sim.initialize();
     sim.run();
 }

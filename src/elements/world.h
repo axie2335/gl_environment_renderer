@@ -6,14 +6,15 @@
 #include "camera.h"
 #include "edge.h"
 
-class world {
+class World {
 public:
-    world() : cam(), vertices(), edges() {};
-    world(camera cam) : cam(cam), vertices(), edges() {};
+    World() : cam(), vertices(), edges() {};
+    World(Camera cam) : cam(cam), vertices(), edges() {};
+    void draw();
 private:
-    camera cam;
-    std::vector<vec3> vertices;
-    std::vector<edge> edges;
+    Camera cam;
+    std::vector<Vec3> vertices{Vec3(0, 0, 0)};
+    std::vector<Edge> edges;
 };
 
 #endif

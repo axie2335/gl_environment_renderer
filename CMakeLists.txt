@@ -9,13 +9,16 @@ add_subdirectory(src)
 find_package(SDL2 REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(GLEW REQUIRED)
 
 target_include_directories(env_render PUBLIC 
     ${SDL2_INCLUDE_DIRS}
     ${OpenCV_INCLUDE_DIRS}
-    ${OPENGL_INCLUDE_DIRS})
+    ${OPENGL_INCLUDE_DIRS}
+    ${GLEW_INCLUDE_DIRS})
 
 target_link_libraries(env_render PRIVATE
     ${SDL2_LIBRARIES}
     ${OpenCV_LIBS}
-    ${OPENGL_LIBRARIES})
+    ${OPENGL_LIBRARIES}
+    ${GLEW_LIBRARIES})

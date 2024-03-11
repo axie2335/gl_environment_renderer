@@ -3,14 +3,14 @@
 
 #include "vec3.h"
 
-class camera {
+class Camera {
 public:
-    camera() : position(vec3(0, 0, 0)), direction(vec3(0, 0, -1)), focal_length(0.018) {};
-    camera(vec3 position, vec3 direction) : position(position), direction(direction), focal_length(0.018) {};
-    camera(vec3 position, vec3 direction, double focal_length) : position(position), direction(direction), focal_length(focal_length) {};
+    Camera() : position(Vec3(0, 0, 0)), direction(Vec3(0, 0, -1)), focal_length(0.018) {};
+    Camera(Vec3 position, Vec3 direction) : position(position), direction(direction), focal_length(0.018) {};
+    Camera(Vec3 position, Vec3 direction, double focal_length) : position(position), direction(direction), focal_length(focal_length) {};
 private:
-    vec3 position;
-    vec3 direction;
+    Vec3 position;
+    Vec3 direction;
     double focal_length;
 };
 
