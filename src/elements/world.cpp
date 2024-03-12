@@ -6,11 +6,18 @@
 
 #include <iostream>
 
+void World::initialize() {
+    for (float i = -10; i < 10; i += 0.1) {
+        vertices.push_back(Vec3(i, 0, 0));
+        vertices.push_back(Vec3(0, i, 0));
+        vertices.push_back(Vec3(0, 0, i));
+    }
+}
+
 void World::draw() {
     glPointSize(5.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    /*
     GLuint vao;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
@@ -18,9 +25,11 @@ void World::draw() {
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vec3), vertices.data(), GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vec3), (void*)Vec3::get_offset());
+    glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, sizeof(Vec3), (void*)0);
     glEnableVertexAttribArray(0);
+
 
     glDrawArrays(GL_POINTS, 0, vertices.size());
     glBindVertexArray(0);
@@ -28,12 +37,6 @@ void World::draw() {
 
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
-    */
-    glBegin(GL_POINTS);
-    for (const auto &vec: vertices) {
-        glVertex3f(vec[0], vec[1], vec[2]);
-    }
-    glEnd();
 }
 
 void World::add_vertice(Vec3 vec3) {

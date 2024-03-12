@@ -10,8 +10,9 @@ class World {
 public:
     World() : cam(), vertices(1, Vec3(0, 0, 0)), edges() {};
     World(Camera cam) : cam(cam), vertices(1, Vec3(0, 0, 0)), edges() {};
-    void draw();
+    void initialize();
 
+    void draw();
     void add_vertice(Vec3 vec3);
 private:
     Camera cam;

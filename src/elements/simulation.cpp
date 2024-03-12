@@ -6,7 +6,7 @@
 #include "world.h"
 
 void Simulation::initialize() {
-    
+    sim_world.initialize();
 }
 
 void Simulation::run() {
@@ -25,9 +25,9 @@ void Simulation::run() {
             }
         }
 
-        std::mt19937 gen(std::random_device{}());
-        std::uniform_real_distribution<float> dis(-1, 1);
-        sim_world.add_vertice(Vec3(dis(gen), dis(gen), dis(gen)));
+        //std::mt19937 gen(std::random_device{}());
+        //std::uniform_real_distribution<float> dis(-1, 1);
+        //sim_world.add_vertice(Vec3(dis(gen), dis(gen), dis(gen)));
 
         world_render.draw();
         frame_count++;
