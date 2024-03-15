@@ -8,8 +8,9 @@
 
 class World {
 public:
-    World() : cam(), vertices(1, Vec3(0, 0, 0)), edges() {};
-    World(Camera cam) : cam(cam), vertices(1, Vec3(0, 0, 0)), edges() {};
+    World() : cam(), vertices(), edges(), 
+        x_rotation(0), y_rotation(0), z_rotation(0) {};
+    World(Camera cam) : cam(cam), vertices(), edges(), x_rotation(0) {};
     void initialize();
 
     void draw();
@@ -18,6 +19,9 @@ private:
     Camera cam;
     std::vector<Vec3> vertices;
     std::vector<Edge> edges;
+    float x_rotation;
+    float y_rotation;
+    float z_rotation;
 };
 
 #endif

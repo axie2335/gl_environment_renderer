@@ -5,9 +5,16 @@
 
 class Camera {
 public:
-    Camera() : position(Vec3(0, 0, 0)), direction(Vec3(0, 0, -1)), focal_length(0.018) {};
+    Camera() : position(Vec3(-1, 1, -5)), direction(Vec3(0.0156, -0.3123, -0.9370)), focal_length(0.018) {};
     Camera(Vec3 position, Vec3 direction) : position(position), direction(direction), focal_length(0.018) {};
     Camera(Vec3 position, Vec3 direction, double focal_length) : position(position), direction(direction), focal_length(focal_length) {};
+
+    double x() { return position[0]; };
+    double y() { return position[1]; };
+    double z() { return position[2]; };
+
+    void translate(double x, double y, double z) {position[0] += x; position[1] += y; position[2] += z; };
+
 private:
     Vec3 position;
     Vec3 direction;
