@@ -16,17 +16,17 @@ void World::initialize() {
 
 void World::draw() {
     glPointSize(5.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear both color and depth buffers
-
-    // Set up model-view and projection matrices
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    // Apply perspective projection
-    gluPerspective(45.0f, (float)1200 / (float)1000, 0.1f, 100.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    //glMatrixMode(GL_PROJECTION);
+    //glLoadIdentity();
+    
+    //gluPerspective(45.0f, (float)1200 / (float)1000, 0.1f, 100.0f);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    // Apply camera transformations
-    glTranslatef(cam.x(), cam.y(), cam.z()); // Move the camera back along the z-axis
+    
+
+    glTranslatef(cam.x(), cam.y(), cam.z());
     cam.translate(0, 0, -0.01);
     x_rotation += 0.5;
     x_rotation = fmod(x_rotation, 360);
@@ -34,16 +34,14 @@ void World::draw() {
     x_rotation = fmod(y_rotation, 360);
     z_rotation += 0.5;
     z_rotation = fmod(z_rotation, 360);
-    glRotatef(x_rotation, 1.0f, 0.0f, 0.0f); // Rotate the camera around the x-axis
-    glRotatef(y_rotation, 0.0f, 1.0f, 0.0f); // Rotate the camera around the y-axis
+    glRotatef(x_rotation, 1.0f, 0.0f, 0.0f);
+    glRotatef(y_rotation, 0.0f, 1.0f, 0.0f);
     glRotatef(z_rotation, 0.0f, 0.0f, 1.0f);
 
-    // Generate and bind vertex array object (VAO)
     GLuint vao;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
-    // Generate and bind vertex buffer object (VBO)
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);

@@ -27,8 +27,8 @@ void SimulationRender::initialize_window() {
 
     float aspectRatio = (float)width / (float)height;
     float fov = 45.0f; // Field of view angle
-    float nearPlane = 0.1f; // Near clipping plane
-    float farPlane = 100.0f; // Far clipping plane
+    float nearPlane = 0.01f; // Near clipping plane
+    float farPlane = 10000.0f; // Far clipping plane
 
     // Define perspective projection
     gluPerspective(fov, aspectRatio, nearPlane, farPlane);
