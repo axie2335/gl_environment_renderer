@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <GL/glext.h>
 #include <GL/gl.h>
+#include <SDL2/SDL.h>
 
 void SimulationRender::initialize_window() {
     int width = 1200;

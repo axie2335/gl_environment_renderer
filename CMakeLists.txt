@@ -17,7 +17,7 @@ target_include_directories(env_render PUBLIC
     ${OPENGL_INCLUDE_DIRS}
     ${GLEW_INCLUDE_DIRS})
 
-target_link_libraries(env_render PRIVATE
+target_link_libraries(env_render PUBLIC
     ${SDL2_LIBRARIES}
     ${OpenCV_LIBS}
     ${OPENGL_LIBRARIES}

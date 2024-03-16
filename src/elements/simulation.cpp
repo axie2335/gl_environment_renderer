@@ -19,15 +19,14 @@ void Simulation::run() {
         while (SDL_PollEvent(&e) != 0) {
             if (e.type == SDL_QUIT) {
                 quit = true;
-            }
-            if (e.key.keysym.scancode == SDL_SCANCODE_P) {
-                quit = true;
+            } else if (e.type == SDL_KEYDOWN) {
+                if (e.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
+                    quit = true;
+                } else {
+                    sim_world.handle_input(e);
+                }
             }
         }
-
-        //std::mt19937 gen(std::random_device{}());
-        //std::uniform_real_distribution<float> dis(-1, 1);
-        //sim_world.add_vertice(Vec3(dis(gen), dis(gen), dis(gen)));
 
         world_render.draw();
         frame_count++;
