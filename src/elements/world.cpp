@@ -104,21 +104,16 @@ void World::draw() {
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-    // Upload vertex data to VBO
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vec3), vertices.data(), GL_STATIC_DRAW);
 
-    // Specify vertex attribute pointer for position
     glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, sizeof(Vec3), (void*)0);
     glEnableVertexAttribArray(0);
 
-    // Draw points
     glDrawArrays(GL_POINTS, 0, vertices.size());
 
-    // Unbind VAO and VBO
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    // Delete VAO and VBO
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
 }

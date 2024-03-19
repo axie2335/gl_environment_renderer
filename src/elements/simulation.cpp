@@ -35,8 +35,6 @@ void Simulation::run() {
         if (duration >= 1) {
             double fps = static_cast<double>(frame_count) / duration;
             std::cout << "FPS: " << fps << std::endl;
-
-            // Reset frame count and start time
             frame_count = 0;
             start_time = std::time(nullptr);
         }
