@@ -3,20 +3,35 @@
 #include <GL/glext.h>
 #include <GL/gl.h>
 #include <SDL2/SDL.h>
+#include <unistd.h>
 
-void SimulationRender::initialize_window() {
+void SimulationRender::initialize_window(cv::VideoCapture video) {
+    this->width = video.get(cv::CAP_PROP_FRAME_WIDTH);
+    this->height = video.get(cv::CAP_PROP_FRAME_HEIGHT);
+    int frame_count = video.get(cv::CAP_PROP_FRAME_COUNT);
+
+    map_frames.reserve(frame_count);
+
+    cv::Mat frame;
+    std::cout << std::endl;
+    while (video.read(frame)) {
+        map_frames.push_back(MapFrame(frame.clone()));
+    } 
+    cur_frame = map_frames.begin();
+
+    std::cout << "Finished processing!" << std::endl;
     int width = 1200;
     int height = 1000;
-    window = nullptr;
+    map_window = nullptr;
     Uint32 window_flags = SDL_WINDOW_OPENGL;
-    window = SDL_CreateWindow("Simulation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, window_flags);
+    map_window = SDL_CreateWindow("Simulation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, window_flags);
 
-    SDL_GLContext context = SDL_GL_CreateContext(window);
+    map_context = SDL_GL_CreateContext(map_window);
 
     GLenum err = glewInit();
     if (err != GLEW_OK) {
         fprintf(stderr, "Failed to initialize GLEW: %s\n", glewGetErrorString(err));
-        SDL_DestroyWindow(window);
+        SDL_DestroyWindow(map_window);
         SDL_Quit();
         exit(EXIT_FAILURE);
     }
@@ -37,10 +52,33 @@ void SimulationRender::initialize_window() {
     glMatrixMode(GL_MODELVIEW); // Switch back to modelview matrix mode
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+    video_window = nullptr;
+    video_window = SDL_CreateWindow("video", 100, 100, this->width, this->height, SDL_WINDOW_SHOWN);
+    video_renderer = SDL_CreateRenderer(video_window, -1, SDL_RENDERER_ACCELERATED);
+
 }
 
 void SimulationRender::draw() {
+    SDL_GL_MakeCurrent(map_window, map_context);
     glClear(GL_COLOR_BUFFER_BIT);
+
     world.draw();
-    SDL_GL_SwapWindow(window);
+    SDL_GL_SwapWindow(map_window);
+    
+    SDL_GL_MakeCurrent(map_window, nullptr);
+
+    SDL_RenderClear(video_renderer);
+    MapFrame &frame = *cur_frame;
+    if (cur_frame != map_frames.end()) {
+        cur_frame++;
+        cv::Mat mat = frame.draw_mat();
+        SDL_Surface *surface = SDL_CreateRGBSurfaceFrom(mat.data, width, height, 24, 3 * width, 0xFF0000, 0x00FF00, 0x0000FF, 0);
+
+    texture = SDL_CreateTextureFromSurface(video_renderer, surface);
+    SDL_FreeSurface(surface);
+    SDL_RenderCopy(video_renderer, texture, NULL, NULL);
+    SDL_RenderPresent(video_renderer);
+    }
+    usleep(50000);
 }
