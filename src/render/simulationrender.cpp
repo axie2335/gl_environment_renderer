@@ -80,5 +80,5 @@ void SimulationRender::draw() {
     SDL_RenderCopy(video_renderer, texture, NULL, NULL);
     SDL_RenderPresent(video_renderer);
     }
-    usleep(50000);
+    //usleep(500);
 }
