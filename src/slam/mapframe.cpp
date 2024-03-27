@@ -11,7 +11,7 @@ cv::Mat MapFrame::draw_mat() {
     //std::cout << this->mat.rows << " " << this->mat.cols << std::endl;
     if (this->mat.rows <= 0 || this->mat.cols <= 0) {
         std::cerr << "Error: Invalid input matrix dimensions." << std::endl;
-        return cv::Mat();  // Return an empty matrix
+        return cv::Mat(); 
     }
     cv::Mat newmat(this->mat.rows, this->mat.cols, CV_8UC3);
 
@@ -20,15 +20,15 @@ cv::Mat MapFrame::draw_mat() {
         int x = (*point)[0];
         int y = (*point)[1];
 
-        for (int ypt = y - 1; ypt <= y + 1; ypt++) { // Corrected condition
+        for (int ypt = y - 1; ypt <= y + 1; ypt++) {
             if (ypt < 0 || ypt >= this->mat.rows) {
                 continue;
             }
-            for (int xpt = x - 1; xpt <= x + 1; xpt++) { // Corrected condition
+            for (int xpt = x - 1; xpt <= x + 1; xpt++) { 
                 if (xpt < 0 || xpt >= this->mat.cols) {
                     continue;
                 }
-                cv::Vec3b &pixel = this->mat.at<cv::Vec3b>(ypt, xpt); // Corrected pixel access
+                cv::Vec3b &pixel = this->mat.at<cv::Vec3b>(ypt, xpt); 
                 pixel[1] = 0xFF;
             }
         }

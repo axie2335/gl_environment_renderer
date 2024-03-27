@@ -16,7 +16,7 @@ void Simulation::run() {
     bool quit = false;
     while (!quit) {
         SDL_Event e;
-        while (SDL_PollEvent(&e) != 0) {
+        SDL_PollEvent(&e);
             if (e.type == SDL_QUIT) {
                 quit = true;
             } else if (e.type == SDL_KEYDOWN) {
@@ -26,7 +26,6 @@ void Simulation::run() {
                     sim_world.handle_input(e);
                 }
             }
-        }
 
         world_render.draw();
         frame_count++;
